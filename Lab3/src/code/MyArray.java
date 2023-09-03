@@ -1,21 +1,21 @@
 package code;
 
-public class MyArray_651306 {
+public class MyArray {
     protected int MAX_SIZE = 100_000;
     protected int data[];
     protected int size = 0;
 
-    public MyArray_651306(int max) {
+    public MyArray(int max) {
         MAX_SIZE = max;
         data = new int[MAX_SIZE];
         size = 0;
     }
 
-    public MyArray_651306() {
+    public MyArray() {
         this(100_000); // Default maximum size is 100_000
     }
 
-    public MyArray_651306(int... a) {
+    public MyArray(int... a) {
         int dataSize = (a == null) ? 0 : Math.min(a.length, MAX_SIZE);
         data = new int[MAX_SIZE];
         for (int i = 0; i < dataSize; i++) {

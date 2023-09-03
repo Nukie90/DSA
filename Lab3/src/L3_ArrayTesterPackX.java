@@ -1,4 +1,4 @@
-import code.MyArray_651306;
+import code.MyArray;
 import code.MyArrayBasic;
 
 class L3_ArrayTesterPackX {
@@ -10,7 +10,7 @@ class L3_ArrayTesterPackX {
     }
 
     static private void myArray_demo4() {
-        MyArray_651306 demo = new MyArray_651306(5);
+        MyArray demo = new MyArray(5);
         demo.delete(0);
         demo.add(3);
         demo.add(7);
@@ -24,7 +24,7 @@ class L3_ArrayTesterPackX {
     static private void task2() {
         for (int N = 200_000; N <= 10 * 200_000; N += 200_000) {
             long start = System.currentTimeMillis();
-            MyArray_651306 mArray = new MyArray_651306(N);
+            MyArray mArray = new MyArray(N);
             for (int n = 1; n < N; n++)
                 mArray.add((int) (Math.random() * 1000));
             long time = (System.currentTimeMillis() - start);
@@ -33,7 +33,7 @@ class L3_ArrayTesterPackX {
         System.out.println("with expansion");
         for (int N = 200_000; N <= 10 * 200_000; N += 200_000) {
             long start = System.currentTimeMillis();
-            MyArray_651306 mArray = new MyArray_651306();
+            MyArray mArray = new MyArray();
             for (int n = 1; n < N; n++)
                 mArray.add((int) (Math.random() * 1000));
             long time = (System.currentTimeMillis() - start);
