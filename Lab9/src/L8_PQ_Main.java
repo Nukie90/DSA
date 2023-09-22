@@ -10,10 +10,10 @@ public class L8_PQ_Main {
     static ArrayList<Integer> least3;
 
     public static void main(String[] args) {
-        // System.out.println("-demo1---");
-        // demo1();
-        // System.out.println("-demo2---");
-        // demo2();
+        System.out.println("-demo1---");
+        demo1();
+        System.out.println("-demo2---");
+        demo2();
         System.out.println("-demo_priorityQueue---");
         demo_priorityQueue();
     }
