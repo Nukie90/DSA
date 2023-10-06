@@ -1,6 +1,4 @@
-//Intutch Sribanyaranond 65011306
-
-import code.TreeNode;
+package code;
 
 public class BST {
     public static void main(String[] args) {
@@ -167,6 +165,48 @@ public class BST {
     public int height(TreeNode node) {
         if (node == null)
             return 0;
-        return 999 /* your code 9 */;
+        /* your code 9 */
+        else {
+            int leftHeight = height(node.left);
+            int rightHeight = height(node.right);
+            return Math.max(leftHeight, rightHeight) + 1;
+        }
     }
+
+    public TreeNode findMaxFrom(TreeNode subtreeHead) {
+        /* your code 10 */
+        TreeNode current = subtreeHead;
+        while (current.right != null)
+            current = current.right;
+        return current;
+    }
+
+    public void delete(int d, TreeNode current) {
+        if (current == null)
+            return; // not found
+        if (d < current.data)
+            delete(d, current.left);
+        else if (d > current.data)
+            delete(d, current.right);
+        else { // found ... time to delete
+            if (current.left == null || current.right == null) { // 0 or 1 child
+                TreeNode q = (current.left == null) ? current.right : current.left;
+                if (current.parent == null) {
+                    // If the current node is the root
+                    root = q;
+                } else if (current.parent.left == current) {
+                    current.parent.left = q; // this node is left child
+                } else {
+                    current.parent.right = q;
+                }
+                if (q != null)
+                    q.parent = current.parent;
+            } else { // two children
+                TreeNode q = findMaxFrom(current.left);
+                current.data = q.data;
+                delete(q.data, current.left);
+            } // two children
+        } // found
+    }
+    
 }
