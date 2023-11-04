@@ -2,19 +2,23 @@ package code;
 
 import java.util.Arrays;
 
-public class Puzzle8State {
+public class Puzzle8State_651306 {
     public int[] sequence;
     public int score;
     
-    public Puzzle8State(int[] newSequence) {
+    public Puzzle8State_651306
+(int[] newSequence) {
         sequence = newSequence;
     }
 
-    public static boolean equals(Puzzle8State a, Puzzle8State b){
+    public static boolean equals(Puzzle8State_651306
+ a, Puzzle8State_651306
+ b){
         return true;
     }
 
-    public static boolean equals(Puzzle8State newState, Puzzle8 puzzle8) {
+    public static boolean equals(Puzzle8State_651306
+ newState, Puzzle8_651306 puzzle8) {
         return false;
     }
 
@@ -38,7 +42,9 @@ public class Puzzle8State {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        Puzzle8State that = (Puzzle8State) obj;
+        Puzzle8State_651306
+     that = (Puzzle8State_651306
+    ) obj;
         return Arrays.equals(sequence, that.sequence);
     }
 }

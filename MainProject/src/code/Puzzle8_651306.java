@@ -5,20 +5,29 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-public class Puzzle8 {
+public class Puzzle8_651306 {
     public int size = 3;
-    public int[] sequence = new int[size * size];
-    public ArrayList<Puzzle8State> explored = new ArrayList<>();
-    public Stack<Puzzle8State> dfs = new Stack<>();
+    public int[] sequence;
+    public ArrayList<Puzzle8State_651306> explored;
+    public Stack<Puzzle8State_651306> dfs;
 
-    public Puzzle8(int[] input){
-        for(int i = 0; i < input.length; i+=3) {
-            int tileValue = input[i];
-            int row = input[i+1];
-            int col = input[i+2];
-            sequence[row * size + col] = tileValue;
+    public Puzzle8_651306(int[] inputArray) {
+        sequence = new int[size * size];
+        int val = 0;
+        int index = 0;
+        for (int i = 0; i < inputArray.length; i++) {
+            if (i % size == 0)
+                val = inputArray[i];
+            else if (i % size == 1)
+                index += inputArray[i] * size;
+            else {
+                index += inputArray[i];
+                sequence[index] = val;
+                index = 0;
+            }
         }
-    
+        explored = new ArrayList<Puzzle8State_651306>();
+        dfs = new Stack<Puzzle8State_651306>();
     }
 
     public void displayBoard() {
@@ -36,84 +45,19 @@ public class Puzzle8 {
 
     public void generateNexMove() {
         int score = 0;
-        int wrong = 9;
         int blankPos = 0;
-        Puzzle8State currentState = new Puzzle8State(sequence);
         for (int i = 0; i < sequence.length; i++) {
             if (sequence[i] == 9) {
                 blankPos = i;
                 break;
             }
         }
-        if (blankPos + 3 < size * size){// south
+        if (blankPos + 3 < size * size){// south)
             int[] newSequence = sequence.clone();
             newSequence[blankPos] = newSequence[blankPos + 3];
             newSequence[blankPos + 3] = 9;
-            Puzzle8State newState = new Puzzle8State(newSequence);
-            if (!Puzzle8State.equals(newState, this)){
-                dfs.push(newState);
-            }
-            for (int i = 0; i < newState.sequence.length; i++) {
-                if (newState.sequence[i] != i+1)
-                    if (newState.sequence[i] != 9)
-                        score++;
-            }
-            System.out.println("Pushing south "+score);
-            System.out.println(newState.toString());
-            if (score < wrong){
-                wrong = score;
-                currentState = newState;
-            }
-            score = 0;
-        }
-        if (blankPos - 3 > -1){// north
-            int[] newSequence = sequence.clone();
-            newSequence[blankPos] = newSequence[blankPos - 3];
-            newSequence[blankPos - 3] = 9;
-            Puzzle8State newState = new Puzzle8State(newSequence);
-            if (!Puzzle8State.equals(newState, this)){
-                dfs.push(newState);
-            }
-            for (int i = 0; i < newState.sequence.length; i++) {
-                if (newState.sequence[i] != i+1)
-                    if (newState.sequence[i] != 9)
-                        score++;
-            }
-            System.out.println("Pushing north "+score);
-            System.out.println(newState.toString());
-            if (score < wrong){
-             wrong = score;
-                currentState = newState;
-            }
-            score = 0;
-        }
-        if (blankPos % 3 < 2){// east
-            int[] newSequence = sequence.clone();
-            newSequence[blankPos] = newSequence[blankPos + 1];
-            newSequence[blankPos + 1] = 9;
-            Puzzle8State newState = new Puzzle8State(newSequence);
-            if (!Puzzle8State.equals(newState, this)){
-                dfs.push(newState);
-            }
-            for (int i = 0; i < newState.sequence.length; i++) {
-                if (newState.sequence[i] != i+1)
-                    if (newState.sequence[i] != 9)
-                        score++;
-            }
-            System.out.println("Pushing east "+score);
-            System.out.println(newState.toString());
-            if (score < wrong){
-             wrong = score;
-                currentState = newState;
-            }
-            score = 0;
-        }
-        if (blankPos % 3 > 0){// west
-            int[] newSequence = sequence.clone();
-            newSequence[blankPos] = newSequence[blankPos - 1];
-            newSequence[blankPos - 1] = 9;
-            Puzzle8State newState = new Puzzle8State(newSequence);
-            if (!Puzzle8State.equals(newState, this)){
+            Puzzle8State_651306 newState = new Puzzle8State_651306(newSequence);
+            if (!Puzzle8State_651306.equals(newState, this)){
                 dfs.push(newState);
             }
             for (int i = 0; i < newState.sequence.length; i++) {
@@ -123,18 +67,63 @@ public class Puzzle8 {
             }
             System.out.println("Pushing west "+score);
             System.out.println(newState.toString());
-            if (score < wrong){
-             wrong = score;
-                currentState = newState;
-            }
             score = 0;
         }
-        // System.out.println("Highest score " + wrong);
-        dfs.push(currentState);
+        if (blankPos - 3 > -1){// north)
+            int[] newSequence = sequence.clone();
+            newSequence[blankPos] = newSequence[blankPos - 3];
+            newSequence[blankPos - 3] = 9;
+            Puzzle8State_651306 newState = new Puzzle8State_651306(newSequence);
+            if (!Puzzle8State_651306.equals(newState, this)){
+                dfs.push(newState);
+            }
+            for (int i = 0; i < newState.sequence.length; i++) {
+                if (newState.sequence[i] != i+1)
+                    if (newState.sequence[i] != 9)
+                        score++;
+            }
+            System.out.println("Pushing west "+score);
+            System.out.println(newState.toString());
+            score = 0;
+        }
+        if (blankPos % 3 < 2){// east)
+            int[] newSequence = sequence.clone();
+            newSequence[blankPos] = newSequence[blankPos + 1];
+            newSequence[blankPos + 1] = 9;
+            Puzzle8State_651306 newState = new Puzzle8State_651306(newSequence);
+            if (!Puzzle8State_651306.equals(newState, this)){
+                dfs.push(newState);
+            }
+            for (int i = 0; i < newState.sequence.length; i++) {
+                if (newState.sequence[i] != i+1)
+                    if (newState.sequence[i] != 9)
+                        score++;
+            }
+            System.out.println("Pushing west "+score);
+            System.out.println(newState.toString());
+            score = 0;
+        }
+        if (blankPos % 3 > 0){// west)
+            int[] newSequence = sequence.clone();
+            newSequence[blankPos] = newSequence[blankPos - 1];
+            newSequence[blankPos - 1] = 9;
+            Puzzle8State_651306 newState = new Puzzle8State_651306(newSequence);
+            if (!Puzzle8State_651306.equals(newState, this)){
+                dfs.push(newState);
+            }
+            for (int i = 0; i < newState.sequence.length; i++) {
+                if (newState.sequence[i] != i+1)
+                    if (newState.sequence[i] != 9)
+                        score++;
+            }
+            System.out.println("Pushing west "+score);
+            System.out.println(newState.toString());
+            score = 0;
+        }
     }
 
-    public List<Puzzle8State> generateNextMove(Puzzle8State currentState) {
-        List<Puzzle8State> nextMoves = new ArrayList<>();
+    public List<Puzzle8State_651306> generateNextMove(Puzzle8State_651306 currentState) {
+        List<Puzzle8State_651306> nextMoves = new ArrayList<>();
         int[] currentSequence = currentState.sequence;
         int blankPos = findBlankPositionInSequence(currentSequence);
         if (blankPos + 3 < size * size) { // south
@@ -152,13 +141,13 @@ public class Puzzle8 {
         return nextMoves;
     }
     
-    private Puzzle8State swapAndReturnNewState(int[] sequence, int blankPos, int targetPos) {
+    private Puzzle8State_651306 swapAndReturnNewState(int[] sequence, int blankPos, int targetPos) {
         int[] clonedSequence = sequence.clone();
         int temp = clonedSequence[blankPos];
         clonedSequence[blankPos] = clonedSequence[targetPos];
         clonedSequence[targetPos] = temp;
     
-        return new Puzzle8State(clonedSequence);
+        return new Puzzle8State_651306(clonedSequence);
     }
     
     private int findBlankPositionInSequence(int[] sequence) {
@@ -173,13 +162,13 @@ public class Puzzle8 {
     private int popCount = 0;
 
     public void nextMoveWithStack() {
-        Puzzle8State initialState = new Puzzle8State(sequence);
+        Puzzle8State_651306 initialState = new Puzzle8State_651306(sequence);
         dfs.push(initialState);
         
         boolean foundGoal = false;
         
         while(!dfs.isEmpty()) {
-            Puzzle8State currentState = dfs.pop();
+            Puzzle8State_651306 currentState = dfs.pop();
             popCount++;
 
             System.out.println("number of pop invocation = " + popCount + " stack size = " + dfs.size() + " explored size = " + explored.size());
@@ -190,7 +179,7 @@ public class Puzzle8 {
                 break;
             }
         
-            for(Puzzle8State nextState : generateNextMove(currentState)) {
+            for(Puzzle8State_651306 nextState : generateNextMove(currentState)) {
                 if(isGoal(nextState)) { 
                     System.out.println("from nextState [" + Arrays.toString(nextState.sequence) + "] found goal [" + Arrays.toString(nextState.sequence) + "] let's terminate the loop");
                     foundGoal = true; 
@@ -212,7 +201,7 @@ public class Puzzle8 {
     }
     
 
-    private boolean isGoal(Puzzle8State state) {
+    private boolean isGoal(Puzzle8State_651306 state) {
         return Arrays.equals(state.sequence, new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9});
         
     }
